@@ -1,0 +1,222 @@
+*Subckts for all AND gates
+.include TSMC_180nm.txt
+
+.subckt AND2 A B out2
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NAND gate with input A
+M_PA c A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input B
+M_PB c B vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NAND with input A
+M_NA c A d gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input B
+M_NB d B gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate for inverting NAND
+M_P_NOT out2 c vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate for inverting NAND
+M_N_NOT out2 c gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends AND2
+
+.subckt AND3 A B C out3
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NAND gate with input A
+M_PA y A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input B
+M_PB y B vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input C
+M_PC y C vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NAND with input A
+M_NA y A x gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input B
+M_NB x B z gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input C
+M_NC z C gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate for inverting NAND
+M_P_NOT out3 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate for inverting NAND
+M_N_NOT out3 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends AND3
+
+.subckt AND4 A B C D out4
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NAND gate with input A
+M_PA y A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input B
+M_PB y B vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input C
+M_PC y C vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input D
+M_PD y D vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NAND with input A
+M_NA y A x gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input B
+M_NB x B z gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input C
+M_NC z C w gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input D
+M_ND w D gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate for inverting NAND
+M_P_NOT out4 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate for inverting NAND
+M_N_NOT out4 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends AND4
+
+.subckt AND5 A B C D E out5
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NAND gate with input A
+M_PA y A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input B
+M_PB y B vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input C
+M_PC y C vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input D
+M_PD y D vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NAND with input E
+M_PE y E vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NAND with input A
+M_NA y A x gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input B
+M_NB x B z gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input C
+M_NC z C w gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input D
+M_ND w D u gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NAND with input E
+M_NE u E gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate for inverting NAND
+M_P_NOT out5 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate for inverting NAND
+M_N_NOT out5 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends AND5

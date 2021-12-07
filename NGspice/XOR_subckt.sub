@@ -1,0 +1,42 @@
+*Subckts for XOR gates
+
+.subckt XOR2 A B out
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NOT with input A
+M_PA c A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT with input A
+M_NA c A gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT with input B
+M_PB out B A vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT with input B
+M_NB out B c gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of PTL
+M_P_PTL out A B vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of PTL
+M_N_PTL B c out gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends

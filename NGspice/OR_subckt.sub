@@ -1,0 +1,223 @@
+*Subckts for all OR gates
+.include TSMC_180nm.txt
+
+.subckt OR2 A B out2
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NOR with input A
+M_PA d A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input B
+M_PB c B d vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOR with input A
+M_NA c A gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input B
+M_NB c B gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate to invert NOR gate output
+M_NOT_P out2 c vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate to invert NOR gate output
+M_NOT_N out2 c gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends OR2
+
+
+.subckt OR3 A B C out3
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NOR with input A
+M_PA x A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input B
+M_PB z B x vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input C
+M_PC y C z vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOR with input A
+M_NA y A gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input B
+M_NB y B gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input C
+M_NC y C gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate to invert NOR gate output
+M_NOT_P out3 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate to invert NOR gate output
+M_NOT_N out3 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends OR3
+
+.subckt OR4 A B C D out4
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NOR with input A
+M_PA x A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input B
+M_PB z B x vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input C
+M_PC w C z vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input D
+M_PD y D w vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOR with input A
+M_NA y A gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input B
+M_NB y B gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input C
+M_NC y C gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input D
+M_ND y D gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate to invert NOR gate output
+M_NOT_P out4 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate to invert NOR gate output
+M_NOT_N out4 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends OR4
+
+.subckt OR5 A B C D E out5
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*PMOS of NOR with input A
+M_PA x A vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input B
+M_PB z B x vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input C
+M_PC w C z vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input D
+M_PD u D w vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*PMOS of NOR with input E
+M_PE y E u vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOR with input A
+M_NA y A gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input B
+M_NB y B gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input C
+M_NC y C gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input D
+M_ND y D gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*NMOS of NOR with input E
+M_NE y E gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate to invert NOR gate output
+M_NOT_P out5 y vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+*NMOS of NOT gate to invert NOR gate output
+M_NOT_N out5 y gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+.ends OR5

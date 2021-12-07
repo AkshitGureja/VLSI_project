@@ -1,0 +1,24 @@
+*Subckt of CMOS inverter
+
+.subckt inv x y
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+*.global gnd vdd
+
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+
+*NMOS of NOT gate
+M_N y x gnd gnd CMOSN W={width_N} L={2*LAMBDA}
++AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+
+*PMOS of NOT gate
+M_P y x vdd vdd CMOSP W={width_P} L={2*LAMBDA}
++AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+
+.ends

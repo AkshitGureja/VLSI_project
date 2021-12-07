@@ -1,0 +1,121 @@
+CLA circuit using subcircuits of the gates as blocks
+
+.include AND_subckt.sub
+.include OR_subckt.sub
+.include XOR_subckt.sub
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.param width_P={20*LAMBDA}
+.param width_N={10*LAMBDA}
+
+Vdd vdd gnd 'SUPPLY'
+.param ckpd=10n
+
+vin_A0 A0 gnd pulse 0 'SUPPLY' 0 0 0 '1*ckpd' '2*ckpd'
+vin_A1 A1 gnd pulse 0 'SUPPLY' 0 0 0 '2*ckpd' '4*ckpd'
+vin_A2 A2 gnd pulse 0 'SUPPLY' 0 0 0 '4*ckpd' '8*ckpd'
+vin_A3 A3 gnd pulse 0 'SUPPLY' 0 0 0 '8*ckpd' '16*ckpd'
+
+vin_B0 B0 gnd pulse 0 'SUPPLY' 0 0 0 '16*ckpd' '32*ckpd'
+vin_B1 B1 gnd pulse 0 'SUPPLY' 0 0 0 '32*ckpd' '64*ckpd'
+vin_B2 B2 gnd pulse 0 'SUPPLY' 0 0 0 '64*ckpd' '128*ckpd'
+vin_B3 B3 gnd pulse 0 'SUPPLY' 0 0 0 '128*ckpd' '256*ckpd'
+
+vin_C0 C0 gnd dc 0
+
+* Propagate gates
+xXOR1 A0 B0 P0 XOR2
+x_XOR2 A1 B1 P1 XOR2
+x_XOR3 A2 B2 P2 XOR2
+x_XOR4 A3 B3 P3 XOR2
+
+* Generate gates
+x_AND1 A0 B0 G0 AND2
+X_AND2 A1 B1 G1 AND2
+x_AND3 A2 B2 G2 AND2
+x_AND4 A3 B3 G3 AND2
+
+* Carry 1
+x_AND5 P0 C0 E0 AND2
+x_OR1 E0 G0 C1 OR2
+
+* Carry 2
+x_AND6 P1 G0 E2 AND2
+x_AND7 P1 P0 C0 E3 AND3
+x_OR2 E2 E3 G1 C2 OR3
+
+* Carry 3
+x_AND8 G1 P2 E4 AND2
+x_AND9 G0 P1 P2 E5 AND3
+x_AND10 G0 P1 P2 P0 E6 AND4
+x_OR3 E4 E5 E6 G2 C3 OR4
+
+* Carry 4
+x_AND11 P3 G2 E7 AND2
+x_AND12 P3 P2 G1 E8 AND3
+x_AND13 P3 P2 P1 G0 E9 AND4
+x_AND14 P3 P2 P1 P0 C0 E10 AND5
+x_OR4 E7 E8 E9 E10 G3 C4 OR5
+
+* Sum block
+x_XOR5 C0 P0 S0 XOR2
+x_XOR6 C1 P1 S1 XOR2
+x_XOR7 C2 P2 S2 XOR2
+x_XOR8 C3 P3 S3 XOR2
+
+Cout1 S0 gnd 100f
+Cout2 S1 gnd 100f
+Cout3 S2 gnd 100f
+Cout4 S3 gnd 100f
+
+.measure tran trise_A0_S0
++ TRIG v(A0) VAL='SUPPLY/2' RISE=2
++ TARG v(S0) VAL='SUPPLY/2' FALL=1
+.measure tran tfall_A0_S0
++ TRIG v(A0) VAL='SUPPLY/2' FALL=2
++ TARG v(S0) VAL='SUPPLY/2' RISE=2
+.measure tran tpd_A0_S0 param = '(trise_A0_S0 + tfall_A0_S0)/2' goal=0
+
+.measure tran trise_A1_S1
++ TRIG v(A1) VAL='SUPPLY/2' RISE=1
++ TARG v(S1) VAL='SUPPLY/2' RISE=1
+.measure tran tfall_A1_S1
++ TRIG v(A1) VAL='SUPPLY/2' FALL=1
++ TARG v(S1) VAL='SUPPLY/2' FALL=2
+.measure tran tpd_A1_S1 param = '(trise_A1_S1 + tfall_A1_S1)/2' goal=0
+
+.measure tran trise_A2_S2
++ TRIG v(A2) VAL='SUPPLY/2' RISE=1
++ TARG v(S2) VAL='SUPPLY/2' RISE=1
+.measure tran tfall_A2_S2
++ TRIG v(A2) VAL='SUPPLY/2' FALL=1
++ TARG v(S2) VAL='SUPPLY/2' FALL=2
+.measure tran tpd_A2_S2 param = '(trise_A2_S2 + tfall_A2_S2)/2' goal=0
+
+.measure tran trise_A3_S3
++ TRIG v(A3) VAL='SUPPLY/2' RISE=1
++ TARG v(S3) VAL='SUPPLY/2' RISE=1
+.measure tran tfall_A3_S3
++ TRIG v(A3) VAL='SUPPLY/2' FALL=1
++ TARG v(S3) VAL='SUPPLY/2' FALL=2
+.measure tran tpd_A3_S3 param = '(trise_A3_S3 + tfall_A3_S3)/2' goal=0
+
+.control
+tran 1n 800n
+plot v(A0) v(B0)+2 v(P0)+4 v(G0)+6
+plot v(A1) v(B1)+2 v(P1)+4 v(G1)+6
+plot v(A2) v(B2)+2 v(P2)+4 v(G2)+6
+plot v(A3) v(B3)+2 v(P3)+4 v(G3)+6
+
+*plot v(C0) v(C1)+2 v(C2)+4 v(C3)+6 v(C4)+8
+plot v(C1) v(C2)+2 v(C3)+4 v(C4)+6
+plot v(P0) v(P1)+2 v(P2)+4 v(P3)+6
+plot v(G0) v(G1)+2 v(G2)+4 v(G3)+6
+plot v(S0) v(S1)+2 v(S2)+4 v(S3)+6
+
+* plot v(A0) v(S0)+2
+* plot v(A1) v(S1)+2
+* plot v(A2) v(S2)+2
+* plot v(A3) v(S3)+2
+.endc
